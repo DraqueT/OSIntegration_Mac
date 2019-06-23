@@ -22,7 +22,7 @@ public class OSIntegration_Mac {
         System.setProperty("com.apple.mrj.application.apple.menu.about.name", displayName);
     }
     
-    public void setIcon(Image icon) {
+    public static void setIcon(Image icon) {
         com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         macApp.setDockIconImage(icon);
     }
