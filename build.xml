@@ -10,6 +10,10 @@
 <project name="OSIntegration_Mac" default="default" basedir=".">
     <description>Builds, tests, and runs the project OSIntegration_Mac.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <target name="-post-jar">
+        <copy file="dist/OSIntegration_Mac.jar" todir="../PolyGlot/src/PolyGlot.ExternalCode/" overwrite="true" />
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

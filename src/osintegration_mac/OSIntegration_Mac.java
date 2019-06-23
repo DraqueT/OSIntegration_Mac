@@ -5,6 +5,8 @@
  */
 package osintegration_mac;
 
+import com.apple.eawt.AppEvent;
+import com.apple.eawt.QuitResponse;
 import java.awt.Component;
 import java.awt.Image;
 import javax.swing.JMenu;
@@ -34,6 +36,17 @@ public class OSIntegration_Mac {
             @Override
             public void handleAbout(com.apple.eawt.AppEvent.AboutEvent ae) {
                 aboutScreen.run();
+            }
+        });
+    }
+    
+    public static void setQuitAction(Runnable quitAction) {
+        com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
+        
+        macApp.setQuitHandler(new com.apple.eawt.QuitHandler() {
+            @Override
+            public void handleQuitRequestWith(AppEvent.QuitEvent qe, QuitResponse qr) {
+                quitAction.run();
             }
         });
     }
