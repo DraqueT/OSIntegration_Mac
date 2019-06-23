@@ -16,17 +16,30 @@ import javax.swing.JMenuBar;
  */
 public class OSIntegration_Mac {
 
-    public static Object integrateToMac(String displayName, Image icon, Runnable aboutScreen) {
+    public static void setDisplayName(String displayName) {
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("apple.awt.application.name", displayName);
-        
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", displayName);
+    }
+    
+    public void setIcon(Image icon) {
         com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         macApp.setDockIconImage(icon);
+    }
+    
+    public static void setAboutHandler(Runnable aboutScreen) {
+        com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
+        
         macApp.setAboutHandler(new com.apple.eawt.AboutHandler() {
             @Override
             public void handleAbout(com.apple.eawt.AppEvent.AboutEvent ae) {
                 aboutScreen.run();
             }
         });
+    }
+    
+    public static Object setBlankAppleMenuBar() {
+        com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         
         // populate menu bar with placeholders until they can be populated later
         JMenuBar menuBar = new JMenuBar();
