@@ -18,6 +18,12 @@ import javax.swing.JMenuBar;
  */
 public class OSIntegration_Mac {
 
+    /**
+     * Sets display name of program
+     * NOTE: This must be done BEFORE any other calls to System, BEFORE UI managers
+     * such as Nimbus are initialized, and BEFORE any swing objects are instantiated
+     * @param displayName name to display
+     */
     public static void setDisplayName(String displayName) {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("apple.awt.application.name", displayName);
