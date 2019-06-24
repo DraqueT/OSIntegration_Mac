@@ -35,6 +35,17 @@ public class OSIntegration_Mac {
         macApp.setDockIconImage(icon);
     }
     
+    public static void setPreferanceManager(Runnable prefs) {
+        com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
+        
+        macApp.setPreferencesHandler(new com.apple.eawt.PreferencesHandler() {
+            @Override
+            public void handlePreferences(AppEvent.PreferencesEvent pe) {
+                prefs.run();
+            }
+        });
+    }
+    
     public static void setAboutHandler(Runnable aboutScreen) {
         com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         
