@@ -19,10 +19,18 @@
  */
 package osintegration_mac;
 
-import com.apple.eawt.AppEvent;
-import com.apple.eawt.QuitResponse;
+//import com.apple.eawt.AppEvent;
+//import com.apple.eawt.QuitResponse;
+import com.apple.eawt.Application;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.desktop.AboutEvent;
+import java.awt.desktop.AboutHandler;
+import java.awt.desktop.PreferencesEvent;
+import java.awt.desktop.PreferencesHandler;
+import java.awt.desktop.QuitEvent;
+import java.awt.desktop.QuitHandler;
+import java.awt.desktop.QuitResponse;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -45,16 +53,16 @@ public class OSIntegration_Mac {
     }
     
     public static void setIcon(Image icon) {
-        com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
+        Application macApp = Application.getApplication();
         macApp.setDockIconImage(icon);
     }
     
     public static void setPreferanceManager(Runnable prefs) {
         com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         
-        macApp.setPreferencesHandler(new com.apple.eawt.PreferencesHandler() {
+        macApp.setPreferencesHandler(new PreferencesHandler() {
             @Override
-            public void handlePreferences(AppEvent.PreferencesEvent pe) {
+            public void handlePreferences(PreferencesEvent e) {
                 prefs.run();
             }
         });
@@ -63,9 +71,9 @@ public class OSIntegration_Mac {
     public static void setAboutHandler(Runnable aboutScreen) {
         com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         
-        macApp.setAboutHandler(new com.apple.eawt.AboutHandler() {
+        macApp.setAboutHandler(new AboutHandler() {
             @Override
-            public void handleAbout(com.apple.eawt.AppEvent.AboutEvent ae) {
+            public void handleAbout(AboutEvent e) {
                 aboutScreen.run();
             }
         });
@@ -74,9 +82,9 @@ public class OSIntegration_Mac {
     public static void setQuitAction(Runnable quitAction) {
         com.apple.eawt.Application macApp = com.apple.eawt.Application.getApplication();
         
-        macApp.setQuitHandler(new com.apple.eawt.QuitHandler() {
+        macApp.setQuitHandler(new QuitHandler() {
             @Override
-            public void handleQuitRequestWith(AppEvent.QuitEvent qe, QuitResponse qr) {
+            public void handleQuitRequestWith(QuitEvent e, QuitResponse response) {
                 quitAction.run();
             }
         });
