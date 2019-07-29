@@ -19,8 +19,6 @@
  */
 package osintegration_mac;
 
-//import com.apple.eawt.AppEvent;
-//import com.apple.eawt.QuitResponse;
 import com.apple.eawt.Application;
 import java.awt.Component;
 import java.awt.Image;
@@ -31,8 +29,10 @@ import java.awt.desktop.PreferencesHandler;
 import java.awt.desktop.QuitEvent;
 import java.awt.desktop.QuitHandler;
 import java.awt.desktop.QuitResponse;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -140,6 +140,14 @@ public class OSIntegration_Mac {
             
             sourceMenuBar.setVisible(false); // no need for this once it's in the top apple bar
             macApp.setDefaultMenuBar(targetBar);
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    new JFrame().setVisible(false);
+                }
+            });
         }
     }
 }
